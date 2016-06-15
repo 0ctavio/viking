@@ -6,32 +6,39 @@ var Viking = function (name, health, strength) {
 };
 
 
-//esta es la arena
-var pit = function ( ) {
+//esta es el constructor arena
+var Pit = function ( ) {
     this.fighters = [ ],
     this.numbersFighters = 0;
 };
 
 
 //añadir vikingos a la arena
-pit.prototype.addVikingToPit = function (viking) {
+Pit.prototype.addVikingToPit = function (viking) {
     this.fighters.push (viking);
-    //pit.push = ();
 };
-
-var viking1 = new Viking ("La montaña", 100, 25);
-var viking2 = new Viking ("Thor", 100, 30);
-
-pit.addVikingToPit(viking1);
-pit.addVikingToPit(viking2);
 
 //esta es la función que obtiene daño aleatorio
-function getDamage(){
-    return Math.floor((Math.random() * 20) + 20);
+Pit.prototype.getDamage = function ( ) {
+    return Math.floor((Math.random ( ) * 20) + 20);
+};
+
+var viking1 = new Viking ("La montaña", getHealth (50, 100), getStrength(20, 40));
+var viking2 = new Viking ("Thor", getHealth (50, 100), getStrength(20, 40));
+
+Pit.addVikingToPit(viking1);
+Pit.addVikingToPit(viking2);
+
+
+//funcion para fuerza aleatoria
+function getStrength (min,max) {
+    return Math.floor(Math.random ( ) * (max-min) + min);
 };
 
 
-
+function getHealth (min,max) {
+    return Math.floor(Math.random ( ) * (max-min) + min);
+};
 
 
 
