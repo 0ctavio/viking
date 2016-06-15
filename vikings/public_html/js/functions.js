@@ -1,59 +1,64 @@
 //este es el Constructor
-var Viking = function (name, health, strength) {
-    this.name = name,
+var Viking = function(name, health, strength) {
+  this.name = name,
     this.health = health,
     this.strength = strength;
 };
 
 //esta es el Constructor arena
-var Pit = function ( ) {
-    this.fighters = [ ],
+var Pit = function() {
+  this.fighters = [],
     this.numbersFighters = 0;
 };
 
 //añadir vikingos a la arena
-Pit.prototype.addVikingToPit = function (viking) {
-    this.fighters.push (viking);
+Pit.prototype.addVikingToPit = function(viking) {
+  this.fighters.push(viking);
 };
 
-//esta es la función que obtiene daño aleatorio
-Pit.prototype.getDamage = function ( ) {
-    return Math.floor((Math.random ( ) * 20) + 20);
+
+//funcion para fuerza aleatoria
+function getStrength(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
-var viking1 = new Viking ("La montaña", getHealth (50, 100), getStrength(20, 40));
-var viking2 = new Viking ("Thor", getHealth (50, 100), getStrength(20, 40));
+//funcion para salud aleatoria
+function getHealth(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+var viking1 = new Viking("La montaña", getHealth(50, 100), getStrength(20, 40));
+var viking2 = new Viking("Thor", getHealth(50, 100), getStrength(20, 40));
 
 Pit.addVikingToPit(viking1);
 Pit.addVikingToPit(viking2);
 
-
-//funcion para fuerza aleatoria
-function getStrength (min,max) {
-    return Math.floor(Math.random ( ) * (max-min) + min);
+//esta es la función que obtiene daño aleatorio
+Pit.prototype.getDamage = function() {
+  return Math.floor((Math.random() * 20) + 20);
 };
 
+function combat() {
+  var turns = 0;
+  while (turns < 8 && viking2.health > viking1.strength && viking1.health > viking2.strength) {
 
-function getHealth (min,max) {
-    return Math.floor(Math.random ( ) * (max-min) + min);
+    console.log(viking2.name + " empieza con " + viking2.health);
+    console.log(viking1.name + " hace " + viking1.strength + " puntos de daño");
+    
+    viking2.health = viking2.health - viking1.strength; //golpe del 2 al 1
+    
+    console.log("La salud de " + viking2.name + " es: " + viking2.health + ". ");
+    
+    //hostia pal 2
+    console.log(viking1.name + " empieza con " + viking1.health);
+    console.log(viking2.name + " hace " + viking2.strength + " puntos de daño");
+    
+    viking1.health = viking1.health - viking2.strength; //golpe del 1 al 2
+    
+    console.log("La salud de " + viking1.name + " es: " + viking1.health + ". ");
+    turns++;
+  }
 };
-
-
-function combat( ) {
-    var turns = 0;
-    while (turns < 8) {
-        var firstHit = viking2.health - viking1.strength;
-
-
-
-        console.log(viking2.name + " el vikingo 2 empieza con " + viking2.health);
-        console.log(viking1.name + " hace " + viking1.strength + " puntos de daño");
-        console.log("La salud de " + viking2.name + " es: " + firstHit + ". ");
-        turns++;
-    }
-};
- 
- 
  
  
  
