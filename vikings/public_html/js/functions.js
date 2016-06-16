@@ -1,4 +1,7 @@
 //este es el Constructor
+
+
+
 var Viking = function(name, health, strength) {
   this.name = name,
     this.health = health,
@@ -17,21 +20,20 @@ Pit.prototype.addVikingToPit = function(viking) {
 };
 
 
-//funcion para fuerza aleatoria
-function getStrength(min, max) {
+//funcion para salud y fuerza aleatoria
+function getValue(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-//funcion para salud aleatoria
-function getHealth(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-};
+var viking1 = new Viking("La montaña", getValue(50, 100), getValue(20, 40));
+var viking2 = new Viking("Thor", getValue(50, 100), getValue(20, 40));
 
-var viking1 = new Viking("La montaña", getHealth(50, 100), getStrength(20, 40));
-var viking2 = new Viking("Thor", getHealth(50, 100), getStrength(20, 40));
+var pit = new Pit();
+pit.addVikingToPit(viking1);
+pit.addVikingToPit(viking2);
 
-Pit.addVikingToPit(viking1);
-Pit.addVikingToPit(viking2);
+
+
 
 //esta es la función que obtiene daño aleatorio
 Pit.prototype.getDamage = function() {
@@ -59,10 +61,6 @@ function combat() {
     turns++;
   }
 };
- 
- 
- 
- 
  
  
  
