@@ -84,16 +84,17 @@ function combat() {
 //COMIENZA LA BATALLA FINAL
 
 //Generamos ejercitos
-function vikingGenerator (number) {
   var vikingArmy = [];
+  var saxonsArmy = [];
+
+function vikingGenerator (number) {
   for (var i = number; i > 0; i--) {
     vikingArmy.push(new Viking(getName(), getValue(50, 100), getValue(20, 40)));
   }
-  vikingArmy;
+  return vikingArmy;
 }
 
 function saxonsGenerator (number) {
-  var saxonsArmy = [];
   for (var i = number; i > 0; i--) {
     saxonsArmy.push(new Saxons(getValue(30, 80), getValue(10, 30)));
   }
