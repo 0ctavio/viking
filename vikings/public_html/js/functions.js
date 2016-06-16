@@ -1,17 +1,23 @@
 //este es el Constructor
 
+var saxonsArmy = [];
 
+
+var Saxons = function(health, strength){
+  this.health = health,
+  this.strength = strength;
+};
 
 var Viking = function(name, health, strength) {
   this.name = name,
-    this.health = health,
-    this.strength = strength;
+  this.health = health,
+  this.strength = strength;
 };
 
 //esta es el Constructor arena
 var Pit = function() {
   this.fighters = [],
-    this.numbersFighters = 0;
+  this.numbersFighters = 0;
 };
 
 //añadir vikingos a la arena
@@ -19,20 +25,53 @@ Pit.prototype.addVikingToPit = function(viking) {
   this.fighters.push(viking);
 };
 
+//este es el constructor de la batalla
 
+var Battle = function(){
+  this.vikingFighter = [],
+  this.numbersVikingFighters= 0;
+};
+
+Battle.prototype.addVikingFighter = function(viking) {
+  this.vikingFighter.push(viking);
+}
+
+var Battle = new Battle();
+
+Battle.addVikingFighter(viking1);
+Battle.addVikingFighter(viking2);
+Battle.addVikingFighter(viking3);
 //funcion para salud y fuerza aleatoria
 function getValue(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-var viking1 = new Viking("La montaña", getValue(50, 100), getValue(20, 40));
-var viking2 = new Viking("Thor", getValue(50, 100), getValue(20, 40));
+function getRandomTurn() {
+   return Math.floor(Math.random() * (8 - 5) + 5);
+   };
 
+function getName(){
+  var nombres = ["Thor", "La Montaña", "Octavio", "Jesús", "Manolo", "Juan", 
+  "Paco", "Cristina", "Lorenzo", "Fernando"];
+
+  var randomName = nombres [Math.floor(Math.random()*nombres.length)];
+  return randomName;
+}
+
+function vikingGenerator (number) {
+  var vikingArmy = [];
+  for (var i = number; i >= 0; i--) {
+    vikingArmy.push(new Viking(getName(), getValue(50, 100), getValue(20, 40)));
+  }
+  return vikingArmy;
+}
+
+var saxon1 = new Saxons(getValue(40, 80), getValue(10, 30));
+var saxon2 = new Saxons(getValue(40, 80), getValue(10,30));
 var pit = new Pit();
+
 pit.addVikingToPit(viking1);
 pit.addVikingToPit(viking2);
-
-
 
 
 //esta es la función que obtiene daño aleatorio
@@ -61,77 +100,3 @@ function combat() {
     turns++;
   }
 };
- 
- 
- 
- 
- 
- 
- 
- /*
- function combat( ) {
-    var viking1Strength = viking1.strength;
-    var viking2Health = viking2.health - viking1Strength;
-    
-    var viking2Strength = viking2.strength;
-    var viking1Health = viking1.health - viking2Strength;
-    
-    var turns = 0;
-    
-    do {
-        console.log (viking2.name + " el vikingo 2 empieza con " + viking2.health);
-        console.log (viking1.name + " hace " + viking1Strength + " puntos de daño");
-        console.log("La salud de " + viking2.name + " es: " + viking2Health + ". ");
-        turns++;
-        
-    } while (turns < 8 || viking2Health < viking1Strength || viking1Health < viking2Strength);
-}
- 
- 
- 
- 
- /*
-function combat() {
-    
-    if (cipher_char == from_char) {
-    result = result + to_char;
-            x++;
-            } else if () {
-
-    }
-
-   else
-            result = result + clear_char;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-function getDamage() {
-    var pointsDamage = Math.floor((Math.random() * 20) + 20);
-    function checkDamage() {
-        return pointsDamage;
-    }
-    return pointsDamage;
-}
-
-var randomDamage = getDamage();
-
-*/
