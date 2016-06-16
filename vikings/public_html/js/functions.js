@@ -1,20 +1,17 @@
 //este es el Constructor
-
-var saxonsArmy = [];
-
-
 var Saxons = function(health, strength){
   this.health = health,
   this.strength = strength;
 };
 
+//este es el Constructor del Vikingo
 var Viking = function(name, health, strength) {
   this.name = name,
   this.health = health,
   this.strength = strength;
 };
 
-//esta es el Constructor arena
+//esta es el Constructor Arena
 var Pit = function() {
   this.fighters = [],
   this.numbersFighters = 0;
@@ -25,49 +22,30 @@ Pit.prototype.addVikingToPit = function(viking) {
   this.fighters.push(viking);
 };
 
-//este es el constructor de la batalla
-
-var Battle = function(){
-  this.vikingFighter = [],
-  this.numbersVikingFighters= 0;
-};
-
-Battle.prototype.addVikingFighter = function(viking) {
-  this.vikingFighter.push(viking);
-}
-
-var Battle = new Battle();
-
-Battle.addVikingFighter(viking1);
-Battle.addVikingFighter(viking2);
-Battle.addVikingFighter(viking3);
 //funcion para salud y fuerza aleatoria
 function getValue(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
+//funcion para nombre aleatorio
+function getName(){
+  var nombres = ["Thor", "La Montaña", "Octavio", "Jesús", "Manolo", "Juan", 
+  "Paco", "Cristina", "Lorenzo", "Fernando", "Dani Malo"];
+
+
+//función Turnos Aleatorios
 function getRandomTurn() {
    return Math.floor(Math.random() * (8 - 5) + 5);
    };
-
-function getName(){
-  var nombres = ["Thor", "La Montaña", "Octavio", "Jesús", "Manolo", "Juan", 
-  "Paco", "Cristina", "Lorenzo", "Fernando"];
-
   var randomName = nombres [Math.floor(Math.random()*nombres.length)];
   return randomName;
 }
 
-function vikingGenerator (number) {
-  var vikingArmy = [];
-  for (var i = number; i >= 0; i--) {
-    vikingArmy.push(new Viking(getName(), getValue(50, 100), getValue(20, 40)));
-  }
-  return vikingArmy;
-}
 
-var saxon1 = new Saxons(getValue(40, 80), getValue(10, 30));
-var saxon2 = new Saxons(getValue(40, 80), getValue(10,30));
+//Añadimos vikingos que entrenaran
+var viking1 = new Viking("La montaña", getValue(50, 100), getValue(20, 40));
+var viking2 = new Viking("Thor", getValue(50, 100), getValue(20, 40));
+
 var pit = new Pit();
 
 pit.addVikingToPit(viking1);
@@ -79,6 +57,7 @@ Pit.prototype.getDamage = function() {
   return Math.floor((Math.random() * 20) + 20);
 };
 
+//Empieza el entrenamiento
 function combat() {
   var turns = 0;
   while (turns < 8 && viking2.health > viking1.strength && viking1.health > viking2.strength) {
@@ -100,3 +79,36 @@ function combat() {
     turns++;
   }
 };
+
+
+//COMIENZA LA BATALLA FINAL
+
+//Generamos ejercitos
+function vikingGenerator (number) {
+  var vikingArmy = [];
+  for (var i = number; i > 0; i--) {
+    vikingArmy.push(new Viking(getName(), getValue(50, 100), getValue(20, 40)));
+  }
+  vikingArmy;
+}
+
+function saxonsGenerator (number) {
+  var saxonsArmy = [];
+  for (var i = number; i > 0; i--) {
+    saxonsArmy.push(new Saxons(getValue(30, 80), getValue(10, 30)));
+  }
+  return saxonsArmy;
+}
+
+
+//este es el constructor de la batalla
+var Battle = function(){
+  this.vikingFighter = [],
+  this.numbersVikingFighters= 0;
+};
+
+Battle.prototype.addVikingFighter = function(viking) {
+  this.vikingFighter.push(viking);
+};
+
+var Battle = new Battle();
