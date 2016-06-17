@@ -27,24 +27,26 @@ function getValue(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-//funcion para nombre aleatorio
-function getName(){
-  var nombres = ["Thor", "La Montaña", "Octavio", "Jesús", "Manolo", "Juan", 
-  "Paco", "Cristina", "Lorenzo", "Fernando", "Dani Malo"];
-
 
 //función Turnos Aleatorios
 function getRandomTurn() {
    return Math.floor(Math.random() * (8 - 5) + 5);
    };
+
+
+//funcion para nombre aleatorio
+function getName(){
+  var nombres = ["Thor", "La Montaña", "Octavio", "Jesús", "Manolo", "Juan", 
+  "Paco", "Cristina", "Lorenzo", "Fernando", "Dani Malo"];
+
   var randomName = nombres [Math.floor(Math.random()*nombres.length)];
   return randomName;
 }
 
 
 //Añadimos vikingos que entrenaran
-var viking1 = new Viking("La montaña", getValue(50, 100), getValue(20, 40));
-var viking2 = new Viking("Thor", getValue(50, 100), getValue(20, 40));
+var viking1 = new Viking(getName(), getValue(50, 100), getValue(20, 40));
+var viking2 = new Viking(getName(), getValue(50, 100), getValue(20, 40));
 
 var pit = new Pit();
 
@@ -102,14 +104,51 @@ function saxonsGenerator (number) {
 }
 
 
-//este es el constructor de la batalla
-var Battle = function(){
-  this.vikingFighter = [],
-  this.numbersVikingFighters= 0;
-};
 
-Battle.prototype.addVikingFighter = function(viking) {
-  this.vikingFighter.push(viking);
-};
 
-var Battle = new Battle();
+function startBattle() {
+   var turn = getRandomTurn();
+   var deathViking = 0;
+   var deathSaxons = 0;
+
+   for (var i = 0; i < vikingArmy.length; i++){
+   
+   /*var vikingLife = vikingArmy[i].health;
+   var saxonLife = saxonsArmy[i].health;
+   var vikingStreng = vikingArmy[i].strength;
+   var saxonStreng = saxonsArmy[i].strength;*/
+
+   var viking = vikingArmy[i];
+   var saxon = saxonsArmy[i];
+  
+   while (turn > 0 && viking.health > 0 && saxon.health > 0) {
+
+    console.log("El vikingo #" + i + " empieza con " + viking.health +  "puntos de SALUD");
+
+    console.log("El saxon #" + i + " empieza con " + saxon.health + "puntos de SALUD");
+   
+    console.log("El vikingo #" + i + " hace " + viking.strength + " puntos de DAÑO");
+
+    saxon[i].health = saxon[i].health - viking[i].strength;
+
+    console.log("El saxon #" + i + " ahora tien " + saxon[i].health  + " de VIDA");
+
+
+    
+    saxon[i].health = saxon[i].health - viking[i].strength; //golpe del 2 al 1
+    
+    console.log("La salud de " + viking2.name + " es: " + viking2.health + ". ");
+    
+    //hostia pal 2
+    console.log(viking1.name + " empieza con " + viking1.health);
+    console.log(viking2.name + " hace " + viking2.strength + " puntos de daño");
+    
+    viking1.health = viking1.health - viking2.strength; //golpe del 1 al 2
+    
+    console.log("La salud de " + viking1.name + " es: " + viking1.health + ". ");
+    turn++;
+    console.log(turn);
+  
+     }
+  }
+};
