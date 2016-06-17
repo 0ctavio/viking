@@ -86,28 +86,28 @@ function combat() {
 //COMIENZA LA BATALLA FINAL
 
 //Generamos ejercitos
-  var vikingArmy = [];
-  var saxonsArmy = [];
+var vikingArmy = [];
+var saxonsArmy = [];
 
-function vikingGenerator (number) {
-  for (var i = number; i > 0; i--) {
-    vikingArmy.push(new Viking(getName(), getValue(50, 100), getValue(20, 40)));
-  }
-  return vikingArmy;
+function vikingGenerator(number) {
+    for (var i = number; i > 0; i--) {
+        vikingArmy.push(new Viking(getName(), getValue(50, 100), getValue(20, 40)));
+    }
+    return vikingArmy;
 }
 
-function saxonsGenerator (number) {
-  for (var i = number; i > 0; i--) {
-    saxonsArmy.push(new Saxons(getValue(60, 100), getValue(15, 35)));
-  }
-  return saxonsArmy;
+function saxonsGenerator(number) {
+    for (var i = number; i > 0; i--) {
+        saxonsArmy.push(new Saxons(getValue(60, 100), getValue(15, 35)));
+    }
+    return saxonsArmy;
 }
 
 
 
 
 function startBattle() {
-    var turn = getRandomTurn();
+    //var turn = getRandomTurn();
     var deathViking = 0;
     var deathSaxons = 0;
 
@@ -116,7 +116,7 @@ function startBattle() {
         var viking = vikingArmy[i];
         var saxon = saxonsArmy[i];
 
-        while (turn > 0 && viking.health > 0 && saxon.health > 0) {
+        while (/*turn > 0 &&*/ viking.health > 0 && saxon.health > 0) {
 
             //El vikingo golpea
             console.log("El vikingo " + viking.name + " empieza con " + viking.health + " puntos de SALUD");
@@ -126,7 +126,7 @@ function startBattle() {
             console.log("El saxon #" + i + " ahora tiene " + saxon.health + " de VIDA");
 
             console.log(" ");
-            
+
             //el sajon responde si no está muerto
             if (saxon.health > 0) {
                 console.log("El saxon se mosquea y le da un leñazo");
@@ -136,27 +136,24 @@ function startBattle() {
 
                 console.log(" ");
             }
-            
+
             if (saxon.health < 0) {
                 deathSaxons++;
-            }
-            
-            else if (viking.health < 0) {
+            } else if (viking.health < 0) {
                 deathViking++;
-                
+
             }
+            //turn--;
+            //console.log(turn);
         }
     }
     console.log("Han muerto " + deathViking + " Vikingos");
     console.log("Han muerto " + deathSaxons + " Sajones");
-    turn--;
-    console.log(turn);
-    
+
     if (deathSaxons < deathViking) {
         console.log("Han ganado los sajones");
-    }
-    
-    else if (deathViking < deathSaxons) {
+    } else if (deathViking < deathSaxons) {
         console.log("Han ganado los Vikingos");
     }
-};
+}
+;
